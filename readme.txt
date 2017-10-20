@@ -1,0 +1,31 @@
+=== Participants Database Custom Templates ===
+Contributors: xnau
+Donate link: https://xnau.com/work/wordpress-plugins/
+Requires at least: 4.1
+Tested up to: 4.7.5
+License: GPLv3
+License URI: https://wordpress.org/about/gpl/
+
+== Description ==
+Provides a convenient and safe place to put Participants Database custom templates
+
+== Installation ==
+1. Download the zip file
+2. Click on "Add New" in the plugins menu
+3. At the top of the "Add Plugins" page find and click the "Upload Plugin" button
+4. Select the zip file on your computer and upload it
+5. The plugin will install itself. Click on "activate" to activate the plugin
+
+**or**
+
+1. Download the zip file
+2. Click on "Add New" in the plugins menu
+3. At the top of the "Add Plugins" page find and click the "Upload Plugin" button
+4. Select the zip file on your computer and upload it
+5. The plugin will install itself. Click on "activate" to activate the plugin
+
+== Changelog ==
+
+= 0.3 =
+initial version
+settings API disabled
