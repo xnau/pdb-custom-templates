@@ -26,6 +26,10 @@ Provides a convenient and safe place to put Participants Database custom templat
 
 == Changelog ==
 
+= 2.0 =
+moved the default templates directory to the content directory
+added multisite support
+
 = 0.3 =
 initial version
 settings API disabled
