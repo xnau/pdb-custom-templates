@@ -8,7 +8,7 @@
  * @author     Roland Barker <webdesign@xnau.com>
  * @copyright  2016  xnau webdesign
  * @license    GPL2
- * @version    0.4
+ * @version    0.5
  * @link       http://xnau.com/wordpress-plugins/
  * @depends    
  */
@@ -61,8 +61,6 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
 
     if ( is_file( $custom_template_path ) ) {
       return $custom_template_path;
-    } else {
-      error_log(__METHOD__. sprintf( ' the custom template at "%s" could not be loaded.', $custom_template_path ) );
     }
 
     return $template;

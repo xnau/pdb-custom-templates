@@ -1,7 +1,7 @@
 <?php
 /*
  * Plugin Name: Participants Database Custom Templates
- * Version: 2.0
+ * Version: 2.1
  * Description: provides an update-safe location for custom templates
  * Author: Roland Barker, xnau webdesign
  * Plugin URI: http://xnau.com/participants-database/
