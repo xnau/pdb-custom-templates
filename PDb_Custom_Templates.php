@@ -26,12 +26,14 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
    */
   public function __construct( $plugin_file )
   {
-    register_activation_hook( $plugin_file, array('PDb_Custom_Templates', 'on_activate') );
+    register_activation_hook( $plugin_file, [ $this, 'on_activate' ] );
 
     // no settings for this plugin
     $this->settings_API_status = false;
 
     parent::__construct( __CLASS__, $plugin_file );
+    
+    add_action( 'wpmu_new_blog', [ $this, 'new_blog' ] );
 
     add_action( 'plugins_loaded', [ $this, 'initialize'] );
   }
@@ -54,22 +56,36 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
    */
   public function set_template( $template )
   {
-    $custom_template_path = $this->template_base_path() . trailingslashit( $this->template_directory() );
-
-    error_log( __METHOD__ . ' template path: ' . $custom_template_path );
-
-    if ( !is_dir( $custom_template_path ) ) {
-      $this->make_template_directory( $custom_template_path );
-    }
-
-    // add the template filename
-    $custom_template_path .= $template;
+    // build the path to the template file
+    $custom_template_path = $this->template_directory() . $template;
 
     if ( is_file( $custom_template_path ) ) {
       return $custom_template_path;
+    } else {
+      error_log(__METHOD__. sprintf( ' the custom template at "%s" could not be loaded.', $custom_template_path ) );
     }
 
     return $template;
+  }
+  
+  /**
+   * provides the template directory path
+   * 
+   * creates it if it does not exist
+   * 
+   * @return string
+   */
+  public function template_directory()
+  {
+    $template_path = $this->template_base_path() . trailingslashit( $this->template_directory_name() );
+
+//    error_log( __METHOD__ . ' template path: ' . $template_path );
+
+    if ( !is_dir( $template_path ) ) {
+      $this->make_template_directory( $template_path );
+    }
+    
+    return $template_path;
   }
 
   /**
@@ -94,7 +110,7 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
    * @global wpdb $wpdb
    * @return string
    */
-  private function template_directory()
+  private function template_directory_name()
   {
     $template_dirname = apply_filters( 'pdb-custemp_template_directory_name', Participants_Db::PLUGIN_NAME . '-templates' );
     global $wpdb;
@@ -115,7 +131,7 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
   private function make_template_directory( $dir = '' )
   {
 
-    $dir = empty( $dir ) ? $this->template_base_path() . trailingslashit( $this->template_directory() ) : $dir;
+    $dir = empty( $dir ) ? $this->template_base_path() . trailingslashit( $this->template_directory_name() ) : $dir;
     $savedmask = umask( 0 );
     $status = true;
     if ( mkdir( $dir, 0755, true ) === false ) {
@@ -127,16 +143,33 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
     umask( $savedmask );
     return $status;
   }
+  
+  /**
+   * handles initializing a new blog
+   * 
+   * @global wpdb $wpdb
+   * @param int $blog_id the new blog id
+   */
+  public function new_blog( $blog_id ) {
+    global $wpdb;
+    $current_blog = $wpdb->blogid;
+    
+    switch_to_blog($blog_id);
+    
+    $this->template_directory();
+    
+    switch_to_blog($current_blog);
+  }
 
   /**
    * set up template directory
    */
-  public static function on_activate( $networkwide = false )
+  public function on_activate( $networkwide = false )
   {
     if ( $networkwide && function_exists( 'is_multisite' ) && is_multisite() ) {
       $this->network_activate();
     } else {
-      $this->set_template('');
+      $this->template_directory();
     }
   }
 
@@ -158,7 +191,7 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
     // cycle through all the blogs, creating the directories as needed
     foreach ( $blogids as $blog_id ) {
       switch_to_blog( $blog_id );
-      $this->set_template('');
+      $this->template_directory();
     }
     
     // restore the original blog pointer
