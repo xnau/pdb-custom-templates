@@ -14,7 +14,7 @@ if ( class_exists( 'Participants_Db') ) {
 }
 function pdb_custom_templates_initialize () {
   global $PDb_Custom_Templates;
-  if (!is_object(@$PDb_Custom_Templates) && version_compare(Participants_Db::$plugin_version, '1.6.2.8', '>')) {
+  if (!is_object(@$PDb_Custom_Templates) && version_compare(Participants_Db::$plugin_version, '1.7.5', '>')) {
     require_once plugin_dir_path(__FILE__) . 'PDb_Custom_Templates.php';
     $PDb_Custom_Templates = new PDb_Custom_Templates(__FILE__);
   }
