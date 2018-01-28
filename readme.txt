@@ -26,6 +26,9 @@ Provides a convenient and safe place to put Participants Database custom templat
 
 == Changelog ==
 
+= 2.2 =
+adjusted the filter to happen later for compatibility with other add-ons
+
 = 2.1 =
 removed debug logging
 
