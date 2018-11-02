@@ -8,7 +8,7 @@
  * @author     Roland Barker <webdesign@xnau.com>
  * @copyright  2016  xnau webdesign
  * @license    GPL2
- * @version    0.6
+ * @version    1.0
  * @link       http://xnau.com/wordpress-plugins/
  * @depends    
  */
@@ -41,8 +41,10 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
   public function initialize()
   {
     $this->aux_plugin_title = __( 'Custom Templates', 'pdb_custom-templates' );
+    
+    add_filter( 'pdb-custom_template_location', [ $this, 'set_custom_location' ], 5 );
 
-    add_action( 'pdb-template_select', [ $this, 'set_template'], 50 );
+//    add_action( 'pdb-template_select', [ $this, 'set_template'] );
   }
 
   /**
@@ -65,6 +67,17 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
     }
 
     return $template;
+  }
+  
+  /**
+   * changes the PDB template location to our custom template location
+   * 
+   * @param string $template_path
+   * @return string
+   */
+  public function set_custom_location( $template_path )
+  {
+    return $this->template_directory();
   }
   
   /**
