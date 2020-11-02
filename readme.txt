@@ -1,8 +1,8 @@
 === Participants Database Custom Templates ===
 Contributors: xnau
 Donate link: https://xnau.com/work/wordpress-plugins/
-Requires at least: 4.1
-Tested up to: 4.9.8
+Requires at least: 5.1
+Tested up to: 5.5.3
 License: GPLv3
 License URI: https://wordpress.org/about/gpl/
 
@@ -25,6 +25,9 @@ Provides a convenient and safe place to put Participants Database custom templat
 5. The plugin will install itself. Click on "activate" to activate the plugin
 
 == Changelog ==
+
+= 2.4 =
+compatibility updates
 
 = 2.3 =
 using new pdb-custom_template_location filter to set the custom template location
