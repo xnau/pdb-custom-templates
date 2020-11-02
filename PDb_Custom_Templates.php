@@ -8,7 +8,7 @@
  * @author     Roland Barker <webdesign@xnau.com>
  * @copyright  2016  xnau webdesign
  * @license    GPL2
- * @version    1.0
+ * @version    1.1
  * @link       http://xnau.com/wordpress-plugins/
  * @depends    
  */
@@ -43,30 +43,6 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
     $this->aux_plugin_title = __( 'Custom Templates', 'pdb_custom-templates' );
     
     add_filter( 'pdb-custom_template_location', [ $this, 'set_custom_location' ], 5 );
-
-//    add_action( 'pdb-template_select', [ $this, 'set_template'] );
-  }
-
-  /**
-   * sets the plugin template
-   * 
-   * use this plugin's default template if a template named "multisearch" has been 
-   * named in the shortcode and a custom override is not present
-   * 
-   * @var string $template name of the currently selected template
-   * @return string template path
-   */
-  public function set_template( $template )
-  {
-    // build the path to the template file in the custom location
-    $custom_template_path = $this->template_directory() . basename( $template );
-
-    // if a matching file exists, use it
-    if ( is_file( $custom_template_path ) ) {
-      return $custom_template_path;
-    }
-
-    return $template;
   }
   
   /**
@@ -138,7 +114,7 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
    *
    * sets an error if it fails
    * 
-   * @param string $dir the name of the new directory
+   * @param bool success
    */
   private function make_template_directory( $dir = '' )
   {
