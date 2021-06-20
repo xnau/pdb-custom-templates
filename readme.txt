@@ -2,7 +2,7 @@
 Contributors: xnau
 Donate link: https://xnau.com/work/wordpress-plugins/
 Requires at least: 5.1
-Tested up to: 5.5.3
+Tested up to: 5.7.2
 License: GPLv3
 License URI: https://wordpress.org/about/gpl/
 
@@ -25,6 +25,9 @@ Provides a convenient and safe place to put Participants Database custom templat
 5. The plugin will install itself. Click on "activate" to activate the plugin
 
 == Changelog ==
+
+= 2.4.1 =
+compatibility updates
 
 = 2.4 =
 compatibility updates
