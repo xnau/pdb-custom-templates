@@ -8,7 +8,7 @@
  * @author     Roland Barker <webdesign@xnau.com>
  * @copyright  2016  xnau webdesign
  * @license    GPL2
- * @version    1.1
+ * @version    1.2
  * @link       http://xnau.com/wordpress-plugins/
  * @depends    
  */
@@ -124,7 +124,7 @@ class PDb_Custom_Templates extends PDb_Aux_Plugin {
     $status = true;
     if ( mkdir( $dir, 0755, true ) === false ) {
 
-      error_log( __METHOD__ . sprintf( __( ' The template directory (%s) could not be created.', 'participants-database' ), $dir ) );
+      Participants_Db::debug_log( __METHOD__ . sprintf( __( ' The template directory (%s) could not be created.', 'participants-database' ), $dir ) );
 
       $status = false;
     }
